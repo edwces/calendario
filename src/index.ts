@@ -3,8 +3,9 @@ import "reflect-metadata";
 import express from "express";
 import dotenv from "dotenv";
 import { buildSchema } from "type-graphql";
-import { PrismaClient } from "@prisma/client";
 import { resolvers } from "./generated/type-graphql/index";
+import prismaClient from "./prisma";
+import logger from "./utils/logger";
 
 dotenv.config();
 
@@ -14,9 +15,6 @@ const HOST = process.env.HOST!;
 (async () => {
   // Create express app
   const app = express();
-
-  // Create Prisma Client
-  const prismaClient = new PrismaClient();
 
   // Create graphql schema
   const schema = await buildSchema({
@@ -37,6 +35,6 @@ const HOST = process.env.HOST!;
   });
 
   app.listen(PORT, HOST, () => {
-    console.log(`Running at http://${HOST}:${PORT}`);
+    logger.info(`Running at http://${HOST}:${PORT}`);
   });
 })();
