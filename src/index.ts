@@ -6,8 +6,11 @@ import { resolvers } from "./generated/type-graphql/index";
 import prismaClient from "./prisma";
 import logger from "./utils/logger";
 import passport from "passport";
+import session from "express-session";
+import redisConnection from "connect-redis";
 import "./config/environment";
 import "./config/passport";
+import redisClient from "./redis";
 
 const PORT = +process.env.PORT!;
 const HOST = process.env.HOST!;
@@ -15,9 +18,24 @@ const HOST = process.env.HOST!;
 (async () => {
   // Create express app
   const app = express();
+  const RStore = redisConnection(session);
 
   // MIDDLEWARE ----
+  app.use(
+    session({
+      store: new RStore({ client: redisClient }),
+      name: "sid",
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      },
+    })
+  );
   app.use(passport.initialize());
+  app.use(passport.session());
 
   // ROUTES ----
   app.get(
