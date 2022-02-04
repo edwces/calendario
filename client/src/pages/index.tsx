@@ -1,7 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import ArrowLeft from "../icons/ArrowLeft";
+import ArrowRight from "../icons/ArrowRight";
 import Calendar from "../modules/calendar/Calendar";
 import MonthView from "../modules/calendar/month/MonthView";
+import StageSwitcher from "../modules/calendar/StageSwitcher";
 import ViewSwitcher from "../modules/calendar/ViewSwitcher";
 import Sidebar from "../modules/sidebar/Sidebar";
 
@@ -14,7 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className=" m-48">
-        <ViewSwitcher />
+        <StageSwitcher />
       </div>
     </div>
   );

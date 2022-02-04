@@ -10,6 +10,7 @@ const styleTypes = {
   primary: "bg-white text-blue-500 shadow-lg",
   active: "bg-white text-blue-500 shadow-lg",
   disabled: "bg-slate-100 text-slate-400",
+  transparent: "",
 };
 
 type ButtonProps = DetailedHTMLProps<
