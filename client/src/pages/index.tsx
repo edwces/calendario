@@ -3,6 +3,7 @@ import Head from "next/head";
 import ArrowLeft from "../icons/ArrowLeft";
 import ArrowRight from "../icons/ArrowRight";
 import Calendar from "../modules/calendar/Calendar";
+import CalendarBar from "../modules/calendar/CalendarBar";
 import MonthView from "../modules/calendar/month/MonthView";
 import StageSwitcher from "../modules/calendar/StageSwitcher";
 import ViewSwitcher from "../modules/calendar/ViewSwitcher";
@@ -17,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className=" m-48">
-        <StageSwitcher />
+        <CalendarBar />
       </div>
     </div>
   );

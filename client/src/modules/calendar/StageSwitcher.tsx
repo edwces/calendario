@@ -4,20 +4,12 @@ import ArrowRight from "../../icons/ArrowRight";
 
 export default function StageSwitcher() {
   return (
-    <div className="inline-flex flex-row gap-1">
+    <div className="inline-flex flex-row">
       <Button variant="transparent" size="sm">
-        <ArrowLeft
-          width={34}
-          height={34}
-          className="transition ease-in duration-200 hover:fill-blue-500"
-        />
+        <ArrowLeft width={34} height={34} />
       </Button>
       <Button variant="transparent" size="sm">
-        <ArrowRight
-          width={34}
-          height={34}
-          className="transition ease-in duration-200 hover:fill-blue-500"
-        />
+        <ArrowRight width={34} height={34} />
       </Button>
     </div>
   );
