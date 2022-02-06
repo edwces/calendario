@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../components/Button";
 
 export default function ViewSwitcher() {
-  const [current, changeCurrent] = useState(-1);
+  const [current, changeCurrent] = useState(0);
 
   return (
     <div className="p-2 inline-flex flex-row bg-slate-100 gap-2 rounded-lg">

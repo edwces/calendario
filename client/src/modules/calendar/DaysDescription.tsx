@@ -1,13 +1,19 @@
 export default function DaysDescription() {
   return (
-    <ul className="flex flex-row w-full justify-between gap-1">
-      <li>Pon</li>
-      <li>Wto</li>
-      <li>Sro</li>
-      <li>Czw</li>
-      <li>Pia</li>
-      <li>Sob</li>
-      <li>Nie</li>
+    <ul className="flex flex-row w-full p-2 gap-1">
+      {[
+        "Poniedzialek",
+        "Wtorek",
+        "Sroda",
+        "Czwartek",
+        "Piatek",
+        "Sobota",
+        "Niedziela",
+      ].map((item, index) => (
+        <li className="grow" key={index}>
+          <h2 className=" text-center">{item}</h2>
+        </li>
+      ))}
     </ul>
   );
 }
