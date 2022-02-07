@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import InputField from "../../components/InputField";
 import Modal from "../../components/Modal";
 
 interface EventModalProps {
@@ -10,11 +11,7 @@ interface EventModalProps {
 
 export default function EventModal({ initialOpen }: EventModalProps) {
   const [isOpen, setOpen] = useState(initialOpen);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -24,10 +21,12 @@ export default function EventModal({ initialOpen }: EventModalProps) {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-5 flex flex-col gap-8"
       >
-        <Input
-          {...register("title", { required: true })}
-          placeholder="Title"
-        ></Input>
+        <InputField
+          label="Title"
+          control={control}
+          name="First"
+          rules={{ required: "This is required Field" }}
+        ></InputField>
         <Button type="submit" className=" w-44">
           Submit
         </Button>

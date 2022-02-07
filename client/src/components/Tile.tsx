@@ -1,12 +1,12 @@
-import Button from "./Button";
+import Button, { ButtonProps } from "./Button";
 
-interface TileProps {
+type TileProps = ButtonProps & {
   date: string;
-}
+};
 
-export default function Tile({ date }: TileProps) {
+export default function Tile({ date, ...props }: TileProps) {
   return (
-    <Button>
+    <Button {...props}>
       <h1 className="mb-16 m-1 font-semibold text-gray-500 text-lg">{date}</h1>
     </Button>
   );
