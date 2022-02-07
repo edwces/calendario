@@ -12,7 +12,8 @@ const styleSize = {
 };
 
 const styleTypes = {
-  primary: "ring-1 ring-slate-300",
+  primary:
+    "outline-0 ring-1 ring-blue-300 focus:outline-2 focus:outline-blue-500",
   error: "ring-2 ring-red-600 outline-none",
 };
 

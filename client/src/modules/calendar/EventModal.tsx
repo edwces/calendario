@@ -1,21 +1,25 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../../components/Button";
-import Input from "../../components/Input";
 import InputField from "../../components/InputField";
 import Modal from "../../components/Modal";
 
 interface EventModalProps {
-  initialOpen: boolean;
+  isOpen: boolean;
+  onRequestClose?: (
+    event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+  ) => void;
+  onSubmit: SubmitHandler<FieldValues>;
 }
 
-export default function EventModal({ initialOpen }: EventModalProps) {
-  const [isOpen, setOpen] = useState(initialOpen);
+export default function EventModal({
+  isOpen,
+  onRequestClose,
+  onSubmit,
+}: EventModalProps) {
   const { handleSubmit, control } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={() => setOpen(false)}>
+    <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <h1 className=" text-4xl font-bold">Add Event</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
