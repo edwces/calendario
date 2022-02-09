@@ -14,6 +14,11 @@ export default function MonthView() {
               key={index + 2}
               date={index + 1}
               onClick={() => setOpen(true)}
+              events={[
+                { title: "hello" },
+                { title: "Welcome" },
+                { title: "khfhhfjdhfjdhf" },
+              ]}
             ></Tile>
           ))}
         </div>
