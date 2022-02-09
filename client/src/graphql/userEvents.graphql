@@ -1,0 +1,7 @@
+query getUserEvents($where: EventWhereInput!) {
+  events(where: $where) {
+    title
+    id
+    date
+  }
+}

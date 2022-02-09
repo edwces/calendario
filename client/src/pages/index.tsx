@@ -1,10 +1,23 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import CalendarBar from "../modules/calendar/CalendarBar";
 import MonthView from "../modules/calendar/month/MonthView";
+import initNotifications from "../lib/initNotifications";
+import { useGetUserEventsQuery } from "../generated/graphql";
 
 // TODO: Find a better way for styling Main div so it grows to have 100 %
 const Home: NextPage = () => {
+  const [result, reexecute] = useGetUserEventsQuery({
+    variables: { where: { userId: { equals: 1 } } },
+  });
+
+  useEffect(() => {
+    (async () => {
+      initNotifications();
+    })();
+  });
+
   return (
     <div>
       <Head>
@@ -16,6 +29,7 @@ const Home: NextPage = () => {
         <CalendarBar />
         <MonthView />
       </div>
+      <div>{result.data?.events[0].title}</div>
     </div>
   );
 };
