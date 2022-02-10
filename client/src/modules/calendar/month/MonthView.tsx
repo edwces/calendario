@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tile from "../../../components/Tile";
 import EventController from "../EventController";
+import { Event } from "../../../generated/graphql";
 
-export default function MonthView() {
-  const [isOpen, setOpen] = useState(false);
+interface MonthViewProps {
+  month?: Date; // the current month the view displays
+}
+
+export default function MonthView({ month }: MonthViewProps) {
+  const [isOpen, setOpen] = useState(false); // controls the event modal
 
   return (
     <section className="flex flex-col p-2 h-full rounded-md bg-slate-200 gap-1">
@@ -14,11 +19,6 @@ export default function MonthView() {
               key={index + 2}
               date={index + 1}
               onClick={() => setOpen(true)}
-              events={[
-                { title: "hello" },
-                { title: "Welcome" },
-                { title: "khfhhfjdhfjdhf" },
-              ]}
             ></Tile>
           ))}
         </div>

@@ -1,16 +1,30 @@
+import { MouseEventHandler } from "react";
 import StageSwitcher from "./StageSwitcher";
 import ViewSwitcher from "./ViewSwitcher";
 
-export default function CalendarBar() {
+interface CalendarBarProps {
+  onLeft?: MouseEventHandler<HTMLButtonElement>;
+  onRight?: MouseEventHandler<HTMLButtonElement>;
+  date: Date;
+}
+
+export default function CalendarBar({
+  onLeft,
+  onRight,
+  date,
+}: CalendarBarProps) {
   return (
     <header className="flex flex-row p-2 bg-slate-50 justify-between items-center">
       <div className="flex flex-row gap-6">
-        <StageSwitcher />
+        <StageSwitcher onLeft={onLeft} onRight={onRight} />
         <h1 className=" font-extrabold text-5xl text-gray-600">
-          February 2022
+          {date.toLocaleString("default", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
         </h1>
       </div>
-      <ViewSwitcher />
     </header>
   );
 }
