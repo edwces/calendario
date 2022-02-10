@@ -12,12 +12,6 @@ const Home: NextPage = () => {
     variables: { where: { userId: { equals: 1 } } },
   });
 
-  useEffect(() => {
-    (async () => {
-      initNotifications();
-    })();
-  });
-
   return (
     <div>
       <Head>
