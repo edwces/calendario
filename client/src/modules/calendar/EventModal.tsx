@@ -28,7 +28,7 @@ export default function EventModal({
         <InputField
           label="Title"
           control={control}
-          name="First"
+          name="title"
           rules={{ required: "This is required Field" }}
         ></InputField>
         <Button type="submit" className=" w-44">

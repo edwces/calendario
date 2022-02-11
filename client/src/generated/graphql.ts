@@ -909,6 +909,13 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['Int']>;
 };
 
+export type AddEventMutationVariables = Exact<{
+  data: EventCreateInput;
+}>;
+
+
+export type AddEventMutation = { __typename?: 'Mutation', createEvent: { __typename?: 'Event', id: number, title: string, date: any } };
+
 export type GetUserEventsQueryVariables = Exact<{
   where: EventWhereInput;
 }>;
@@ -2812,6 +2819,19 @@ export default {
   }
 } as unknown as IntrospectionQuery;
 
+export const AddEventDocument = gql`
+    mutation addEvent($data: EventCreateInput!) {
+  createEvent(data: $data) {
+    id
+    title
+    date
+  }
+}
+    `;
+
+export function useAddEventMutation() {
+  return Urql.useMutation<AddEventMutation, AddEventMutationVariables>(AddEventDocument);
+};
 export const GetUserEventsDocument = gql`
     query getUserEvents($where: EventWhereInput!) {
   events(where: $where) {

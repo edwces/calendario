@@ -9,7 +9,7 @@ interface MonthViewProps {
 }
 
 export default function MonthView({ date, events }: MonthViewProps) {
-  const [isOpen, setOpen] = useState(false); // controls the event modal
+  const [isOpen, setOpen] = useState(""); // controls the event modal
   console.log(events);
 
   useEffect(() => {
@@ -29,7 +29,15 @@ export default function MonthView({ date, events }: MonthViewProps) {
             <Tile
               key={index + 2}
               date={index + 1 + wIndex * 7}
-              onClick={() => setOpen(true)}
+              onClick={() =>
+                setOpen(
+                  new Date(
+                    date.getFullYear(),
+                    date.getMonth(),
+                    index + wIndex * 7
+                  ).toLocaleDateString("en-CA")
+                )
+              }
               events={events.filter(
                 (item) =>
                   new Date(item.date).getDate() === index + 1 + wIndex * 7
@@ -39,7 +47,11 @@ export default function MonthView({ date, events }: MonthViewProps) {
         </div>
       ))}
 
-      <EventController isOpen={isOpen} onRequestClose={() => setOpen(false)} />
+      <EventController
+        isOpen={!!isOpen}
+        selectedDate={isOpen}
+        onRequestClose={() => setOpen("")}
+      />
     </section>
   );
 }
