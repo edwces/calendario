@@ -13,7 +13,7 @@ interface TileEventProps {
 export default function TileEvent({ title, color = "blue" }: TileEventProps) {
   return (
     <article
-      className={`p-1 ${styleColor[color]} text-white font-semibold rounded-md overflow-hidden whitespace-nowrap`}
+      className={`p-1 ${styleColor[color]} text-white font-semibold rounded-md`}
     >
       {title}
     </article>

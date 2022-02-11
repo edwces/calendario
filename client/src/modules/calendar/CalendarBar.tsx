@@ -1,6 +1,5 @@
 import { MouseEventHandler } from "react";
 import StageSwitcher from "./StageSwitcher";
-import ViewSwitcher from "./ViewSwitcher";
 
 interface CalendarBarProps {
   onLeft?: MouseEventHandler<HTMLButtonElement>;
