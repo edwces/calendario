@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useGetUserEventsQuery } from "../../generated/graphql";
-import CalendarBar from "./CalendarBar";
-import MonthView from "./month/MonthView";
+import CalendarBar from "./bar/CalendarBar";
+import MonthView from "./MonthView";
 
 export default function Calendar() {
   const [date, setDate] = useState(new Date());

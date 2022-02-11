@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 
 export default function ViewSwitcher() {
   const [current, changeCurrent] = useState(0);

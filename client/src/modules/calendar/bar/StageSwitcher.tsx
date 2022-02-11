@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
-import Button from "../../components/Button";
-import ArrowLeft from "../../icons/ArrowLeft";
-import ArrowRight from "../../icons/ArrowRight";
+import Button from "../../../components/Button";
+import ArrowLeft from "../../../icons/ArrowLeft";
+import ArrowRight from "../../../icons/ArrowRight";
 
 interface StageSwitcherProps {
   onLeft?: MouseEventHandler<HTMLButtonElement>;
