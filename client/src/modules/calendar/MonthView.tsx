@@ -39,12 +39,11 @@ export default function MonthView({ date, events }: MonthViewProps) {
               onClick={() =>
                 setOpen(getDate(index, wIndex).toLocaleDateString("en-CA"))
               }
-              events={events.filter((item) => {
-                return (
-                  new Date(item.date).toISOString().split("T")[0] ===
-                  getDate(index, wIndex).toISOString().split("T")[0]
-                );
-              })}
+              events={events.filter(
+                (item) =>
+                  new Date(item.date).toLocaleDateString().split("T")[0] ===
+                  getDate(index, wIndex).toLocaleDateString().split("T")[0]
+              )}
               variant={
                 notInMonth(calculateDay(index, wIndex)) ? "disabled" : "primary"
               }
