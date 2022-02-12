@@ -31,7 +31,7 @@ export default function MonthView({ date, events }: MonthViewProps) {
   return (
     <section className="flex flex-col p-2 h-full rounded-md bg-slate-200 gap-1">
       {[...Array(5)].map((item, wIndex) => (
-        <div className="grow flex flex-row gap-1" key={wIndex}>
+        <div className="grow flex flex-row gap-1 basis-full" key={wIndex}>
           {[...Array(7)].map((item, index) => (
             <Tile
               key={getDate(index, wIndex).getDate()}
