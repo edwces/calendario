@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import Tile from "../../components/Tile";
 import EventController from "../modals/EventController";
 import { Event } from "../../generated/graphql";
-import {
-  getDatesAfter,
-  getDatesBefore,
-  getDaysInMonth,
-  getFirstDay,
-  getLastDay,
-} from "../../lib/dateUtils";
+import { getDaysInMonth, getFirstDay } from "../../lib/dateUtils";
 
 interface MonthViewProps {
   date: Date; // the current month the view displays
@@ -18,11 +12,20 @@ interface MonthViewProps {
 export default function MonthView({ date, events }: MonthViewProps) {
   const [isOpen, setOpen] = useState(""); // controls the event modal
 
+  console.log(events);
+
   const daysBefore = getFirstDay(date).getDay() - 1;
 
+  const calculateDay = (index: number, wIndex: number) =>
+    index + 7 * wIndex - daysBefore + 1;
+
   const getDate = (index: number, wIndex: number) => {
-    const day = index + 7 * wIndex - daysBefore + 1;
-    return new Date(date.getFullYear(), date.getMonth(), day).getDate();
+    const day = calculateDay(index, wIndex);
+    return new Date(date.getFullYear(), date.getMonth(), day);
+  };
+
+  const notInMonth = (day: number) => {
+    return day <= 0 || day > getDaysInMonth(date);
   };
 
   return (
@@ -31,21 +34,20 @@ export default function MonthView({ date, events }: MonthViewProps) {
         <div className="grow flex flex-row gap-1" key={wIndex}>
           {[...Array(7)].map((item, index) => (
             <Tile
-              key={index + 2}
-              date={getDate(index, wIndex)}
+              key={getDate(index, wIndex).getDate()}
+              date={getDate(index, wIndex).getDate()}
               onClick={() =>
-                setOpen(
-                  new Date(
-                    date.getFullYear(),
-                    date.getMonth(),
-                    getDate(index, wIndex)
-                  ).toLocaleDateString("en-CA")
-                )
+                setOpen(getDate(index, wIndex).toLocaleDateString("en-CA"))
               }
-              events={events.filter(
-                (item) =>
-                  new Date(item.date).getDate() === getDate(index, wIndex)
-              )}
+              events={events.filter((item) => {
+                return (
+                  new Date(item.date).toISOString().split("T")[0] ===
+                  getDate(index, wIndex).toISOString().split("T")[0]
+                );
+              })}
+              variant={
+                notInMonth(calculateDay(index, wIndex)) ? "disabled" : "primary"
+              }
             ></Tile>
           ))}
         </div>

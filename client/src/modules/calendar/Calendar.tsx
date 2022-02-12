@@ -34,7 +34,8 @@ export default function Calendar() {
           date={date}
           events={data.events.filter(
             (item) =>
-              new Date(item.date).getMonth() === date.getMonth() &&
+              new Date(item.date).getMonth() <= date.getMonth() + 1 &&
+              new Date(item.date).getMonth() >= date.getMonth() - 1 &&
               new Date(item.date).getFullYear() === date.getFullYear()
           )}
         />
