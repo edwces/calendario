@@ -1,0 +1,7 @@
+mutation editEvent($data: EventUpdateInput!, $where: EventWhereUniqueInput!) {
+  updateEvent(data: $data, where: $where) {
+    id
+    title
+    date
+  }
+}

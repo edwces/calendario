@@ -1,0 +1,7 @@
+mutation deleteEvent($where: EventWhereUniqueInput!) {
+  deleteEvent(where: $where) {
+    id
+    title
+    date
+  }
+}

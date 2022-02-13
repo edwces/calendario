@@ -916,6 +916,21 @@ export type AddEventMutationVariables = Exact<{
 
 export type AddEventMutation = { __typename?: 'Mutation', createEvent: { __typename?: 'Event', id: number, title: string, date: any } };
 
+export type DeleteEventMutationVariables = Exact<{
+  where: EventWhereUniqueInput;
+}>;
+
+
+export type DeleteEventMutation = { __typename?: 'Mutation', deleteEvent?: { __typename?: 'Event', id: number, title: string, date: any } | null };
+
+export type EditEventMutationVariables = Exact<{
+  data: EventUpdateInput;
+  where: EventWhereUniqueInput;
+}>;
+
+
+export type EditEventMutation = { __typename?: 'Mutation', updateEvent?: { __typename?: 'Event', id: number, title: string, date: any } | null };
+
 export type GetUserEventsQueryVariables = Exact<{
   where: EventWhereInput;
 }>;
@@ -2831,6 +2846,32 @@ export const AddEventDocument = gql`
 
 export function useAddEventMutation() {
   return Urql.useMutation<AddEventMutation, AddEventMutationVariables>(AddEventDocument);
+};
+export const DeleteEventDocument = gql`
+    mutation deleteEvent($where: EventWhereUniqueInput!) {
+  deleteEvent(where: $where) {
+    id
+    title
+    date
+  }
+}
+    `;
+
+export function useDeleteEventMutation() {
+  return Urql.useMutation<DeleteEventMutation, DeleteEventMutationVariables>(DeleteEventDocument);
+};
+export const EditEventDocument = gql`
+    mutation editEvent($data: EventUpdateInput!, $where: EventWhereUniqueInput!) {
+  updateEvent(data: $data, where: $where) {
+    id
+    title
+    date
+  }
+}
+    `;
+
+export function useEditEventMutation() {
+  return Urql.useMutation<EditEventMutation, EditEventMutationVariables>(EditEventDocument);
 };
 export const GetUserEventsDocument = gql`
     query getUserEvents($where: EventWhereInput!) {
