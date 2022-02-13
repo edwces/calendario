@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import Modal from "../../components/Modal";
 
-interface EventModalProps {
+interface EventCreateModalProps {
   isOpen: boolean;
   onRequestClose?: (
     event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
@@ -11,11 +11,11 @@ interface EventModalProps {
   onSubmit: SubmitHandler<FieldValues>;
 }
 
-export default function EventModal({
+export default function EventCreateModal({
   isOpen,
   onRequestClose,
   onSubmit,
-}: EventModalProps) {
+}: EventCreateModalProps) {
   const { handleSubmit, control } = useForm();
 
   return (

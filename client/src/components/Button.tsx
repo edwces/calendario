@@ -11,6 +11,7 @@ const styleTypes = {
   active: "bg-white text-blue-500 shadow-lg",
   disabled: "bg-slate-100 text-slate-400",
   transparent: "",
+  delete: "bg-red-500 text-white shadow-lg",
 };
 
 export type ButtonProps = DetailedHTMLProps<

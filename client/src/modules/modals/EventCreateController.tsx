@@ -1,8 +1,8 @@
 import { FieldValues } from "react-hook-form";
 import { useAddEventMutation } from "../../generated/graphql";
-import EventModal from "./EventModal";
+import EventCreateModal from "./EventCreateModal";
 
-interface EventControllerProps {
+interface EventCreateControllerProps {
   isOpen: boolean;
   onRequestClose?: (
     event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
@@ -10,11 +10,11 @@ interface EventControllerProps {
   selectedDate: string;
 }
 
-export default function EventController({
+export default function EventCreateController({
   isOpen,
   onRequestClose,
   selectedDate,
-}: EventControllerProps) {
+}: EventCreateControllerProps) {
   const [result, execute] = useAddEventMutation();
 
   const onSubmit = async (data: FieldValues) => {
@@ -31,10 +31,10 @@ export default function EventController({
   };
 
   return (
-    <EventModal
+    <EventCreateModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       onSubmit={onSubmit}
-    ></EventModal>
+    ></EventCreateModal>
   );
 }

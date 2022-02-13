@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Tile from "../../components/Tile";
-import EventController from "../modals/EventController";
+import EventCreateController from "../modals/EventCreateController";
 import { Event } from "../../generated/graphql";
 import { getDaysInMonth, getFirstDay } from "../../lib/dateUtils";
 
@@ -52,7 +52,7 @@ export default function MonthView({ date, events }: MonthViewProps) {
         </div>
       ))}
 
-      <EventController
+      <EventCreateController
         isOpen={!!isOpen}
         selectedDate={isOpen}
         onRequestClose={() => setOpen("")}
