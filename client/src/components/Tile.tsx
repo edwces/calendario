@@ -1,3 +1,4 @@
+import React, { HTMLAttributes, MouseEventHandler } from "react";
 import { Event } from "../generated/graphql";
 import Button, { ButtonProps } from "./Button";
 import TileEvent from "./TileEvent";
@@ -11,12 +12,14 @@ type TileProps = ButtonProps & {
   date: number;
   events?: Partial<Event>[];
   variant?: keyof typeof styleTypes;
+  onEventClick?: (e: React.MouseEvent<HTMLButtonElement>, id?: number) => void;
 };
 
 export default function Tile({
   date,
   className,
   events,
+  onEventClick,
   variant = "primary",
   ...props
 }: TileProps) {
@@ -31,7 +34,11 @@ export default function Tile({
       <div className="flex flex-col gap-1 h-full">
         {events &&
           events.map((item, index) => (
-            <TileEvent key={index} title={item.title!}></TileEvent>
+            <TileEvent
+              key={index}
+              title={item.title!}
+              onClick={(e) => onEventClick!(e, item.id)}
+            ></TileEvent>
           ))}
       </div>
     </Button>

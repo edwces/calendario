@@ -10,7 +10,7 @@ interface EventEditControllerProps {
   onRequestClose?: (
     event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
   ) => void;
-  id: string;
+  id: number;
 }
 
 export default function EventEditController({
@@ -24,19 +24,17 @@ export default function EventEditController({
   const onSubmit = async (data: FieldValues) => {
     await eexecute({
       data: {
-        title: data.title,
+        title: { set: data.title },
       },
-      where: { id: parseInt(id) },
+      where: { id: id },
     });
   };
 
   const onDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-
     await dexecute({
-      where: { id: parseInt(id) },
+      where: { id: id },
     });
-    e.stopPropagation();
   };
 
   return (

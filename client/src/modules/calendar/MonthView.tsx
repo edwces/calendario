@@ -3,6 +3,7 @@ import Tile from "../../components/Tile";
 import EventCreateController from "../modals/EventCreateController";
 import { Event } from "../../generated/graphql";
 import { getDaysInMonth, getFirstDay } from "../../lib/dateUtils";
+import EventEditController from "../modals/EventEditController";
 
 interface MonthViewProps {
   date: Date; // the current month the view displays
@@ -10,7 +11,9 @@ interface MonthViewProps {
 }
 
 export default function MonthView({ date, events }: MonthViewProps) {
-  const [isOpen, setOpen] = useState(""); // controls the event modal
+  const [isCreateOpen, setCreateOpen] = useState(""); // controls the event modal
+  const [isEditOpen, setEditOpen] = useState(false);
+  const [id, setId] = useState(0);
 
   console.log(events);
 
@@ -37,8 +40,15 @@ export default function MonthView({ date, events }: MonthViewProps) {
               key={getDate(index, wIndex).getDate()}
               date={getDate(index, wIndex).getDate()}
               onClick={() =>
-                setOpen(getDate(index, wIndex).toLocaleDateString("en-CA"))
+                setCreateOpen(
+                  getDate(index, wIndex).toLocaleDateString("en-CA")
+                )
               }
+              onEventClick={(e, id) => {
+                e.stopPropagation();
+                setId(id!);
+                setEditOpen(true);
+              }}
               events={events.filter(
                 (item) =>
                   new Date(item.date).toLocaleDateString().split("T")[0] ===
@@ -53,10 +63,15 @@ export default function MonthView({ date, events }: MonthViewProps) {
       ))}
 
       <EventCreateController
-        isOpen={!!isOpen}
-        selectedDate={isOpen}
-        onRequestClose={() => setOpen("")}
+        isOpen={!!isCreateOpen}
+        selectedDate={isCreateOpen}
+        onRequestClose={() => setCreateOpen("")}
       />
+      <EventEditController
+        isOpen={isEditOpen}
+        onRequestClose={() => setEditOpen(false)}
+        id={id}
+      ></EventEditController>
     </section>
   );
 }
