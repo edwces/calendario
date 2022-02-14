@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import "reflect-metadata";
 import express from "express";
 import { buildSchema } from "type-graphql";
@@ -57,7 +57,11 @@ const HOST = process.env.HOST!;
   // Create apollo server with schema
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res, prisma: prismaClient }),
+    context: ({ req, res }) => {
+      if (!req.user) throw new AuthenticationError("You must be logged in");
+
+      return { req, res, prisma: prismaClient };
+    },
   });
   await apolloServer.start();
   logger.info("Apollo Server started");
