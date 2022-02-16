@@ -11,6 +11,7 @@ import redisConnection from "connect-redis";
 import "./config/environment";
 import "./config/passport";
 import redisClient from "./redis";
+import cors from "cors";
 
 const PORT = +process.env.PORT!;
 const HOST = process.env.HOST!;
@@ -19,8 +20,14 @@ const HOST = process.env.HOST!;
   // Create express app
   const app = express();
   const RStore = redisConnection(session);
-
   // MIDDLEWARE ----
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
+
   app.use(
     session({
       store: new RStore({ client: redisClient }),
@@ -36,14 +43,13 @@ const HOST = process.env.HOST!;
   );
   app.use(passport.initialize());
   app.use(passport.session());
-
   // ROUTES ----
   app.get(
     "/auth/google",
     passport.authenticate("google", { scope: ["profile"] })
   );
   app.get("/auth/redirect", passport.authenticate("google"), (req, res) => {
-    res.redirect("/");
+    res.redirect("http://localhost:3001/");
   });
   app.get("/", (req, res) => {
     res.send(`hello ${req.user?.id}`);
