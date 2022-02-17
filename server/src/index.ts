@@ -12,6 +12,7 @@ import "./config/environment";
 import "./config/passport";
 import redisClient from "./redis";
 import cors from "cors";
+import { MeResolver } from "./resolvers/meResolver";
 
 const PORT = +process.env.PORT!;
 const HOST = process.env.HOST!;
@@ -23,7 +24,6 @@ const HOST = process.env.HOST!;
   // MIDDLEWARE ----
   app.use(
     cors({
-      origin: "http://localhost:3000",
       credentials: true,
     })
   );
@@ -57,7 +57,7 @@ const HOST = process.env.HOST!;
 
   // Create graphql schema
   const schema = await buildSchema({
-    resolvers: resolvers,
+    resolvers: [...resolvers, MeResolver],
   });
   logger.info("GraphQL schema built");
   // Create apollo server with schema
