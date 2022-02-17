@@ -547,6 +547,7 @@ export type Query = {
   findFirstUser?: Maybe<User>;
   groupByEvent: Array<EventGroupBy>;
   groupByUser: Array<UserGroupBy>;
+  me: User;
   user?: Maybe<User>;
   users: Array<User>;
 };
@@ -930,6 +931,11 @@ export type EditEventMutationVariables = Exact<{
 
 
 export type EditEventMutation = { __typename?: 'Mutation', updateEvent?: { __typename?: 'Event', id: number, title: string, date: any } | null };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, name: string, avatar: string } };
 
 export type GetUserEventsQueryVariables = Exact<{
   where: EventWhereInput;
@@ -2313,6 +2319,18 @@ export default {
             ]
           },
           {
+            "name": "me",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "user",
             "type": {
               "kind": "OBJECT",
@@ -2872,6 +2890,19 @@ export const EditEventDocument = gql`
 
 export function useEditEventMutation() {
   return Urql.useMutation<EditEventMutation, EditEventMutationVariables>(EditEventDocument);
+};
+export const MeDocument = gql`
+    query me {
+  me {
+    id
+    name
+    avatar
+  }
+}
+    `;
+
+export function useMeQuery(options?: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'>) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
 export const GetUserEventsDocument = gql`
     query getUserEvents($where: EventWhereInput!) {
