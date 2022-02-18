@@ -26,20 +26,19 @@ export default function Calendar() {
 
   if (error) return <section>Error</section>;
   if (fetching) return <section>Fetching</section>;
-  if (data) {
-    return (
-      <section className="flex flex-col h-screen w-screen">
-        <CalendarBar onLeft={onLeft} onRight={onRight} date={date} />
-        <MonthView
-          date={date}
-          events={data.events.filter(
-            (item) =>
-              new Date(item.date).getMonth() <= date.getMonth() + 1 &&
-              new Date(item.date).getMonth() >= date.getMonth() - 1 &&
-              new Date(item.date).getFullYear() === date.getFullYear()
-          )}
-        />
-      </section>
-    );
-  }
+
+  return (
+    <section className="flex flex-col h-screen w-screen">
+      <CalendarBar onLeft={onLeft} onRight={onRight} date={date} />
+      <MonthView
+        date={date}
+        events={data!.events.filter(
+          (item) =>
+            new Date(item.date).getMonth() <= date.getMonth() + 1 &&
+            new Date(item.date).getMonth() >= date.getMonth() - 1 &&
+            new Date(item.date).getFullYear() === date.getFullYear()
+        )}
+      />
+    </section>
+  );
 }

@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import ReactModal from "react-modal";
 import createUrqlClient from "../lib/createUrqlClient";
 import { Provider } from "urql";
+import { UserStateProvider } from "../stores/userState/userStateContext";
 
 ReactModal.setAppElement("#__next");
 const client = createUrqlClient();
@@ -10,7 +11,9 @@ const client = createUrqlClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
-      <Component {...pageProps} />
+      <UserStateProvider>
+        <Component {...pageProps} />
+      </UserStateProvider>
     </Provider>
   );
 }

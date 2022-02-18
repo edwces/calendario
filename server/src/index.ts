@@ -25,6 +25,7 @@ const HOST = process.env.HOST!;
   app.use(
     cors({
       credentials: true,
+      origin: ["http://localhost:3000"],
     })
   );
 
@@ -74,6 +75,7 @@ const HOST = process.env.HOST!;
   // Mount apollo middleware
   apolloServer.applyMiddleware({
     app,
+    cors: false,
   });
 
   app.listen(PORT, HOST, () => {
