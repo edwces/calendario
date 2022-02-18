@@ -2,8 +2,8 @@ import GoogleLogin from "./GoogleLogin";
 
 export default function LoginBox() {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="bg-white shadow-md rounded-md p-10">
+      <h1 className="text-6xl font-bold mb-20 text-center">Login</h1>
       <GoogleLogin />
     </div>
   );
