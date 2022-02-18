@@ -50,7 +50,7 @@ const HOST = process.env.HOST!;
     passport.authenticate("google", { scope: ["profile"] })
   );
   app.get("/auth/redirect", passport.authenticate("google"), (req, res) => {
-    res.redirect("http://localhost:3001/");
+    res.redirect("http://localhost:3000/");
   });
   app.get("/", (req, res) => {
     res.send(`hello ${req.user?.id}`);

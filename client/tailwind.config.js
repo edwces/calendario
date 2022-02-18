@@ -13,6 +13,7 @@ module.exports = {
         "Segoe UI",
         "sans-serif",
       ],
+      roboto: ["Roboto", "Segoe UI"],
     },
     extend: {},
   },

@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Calendar from "../modules/calendar/Calendar";
+import LoginBox from "../modules/auth/LoginBox";
 
 // TODO: Find a better way for styling Main div so it grows to have 100 %
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <div>
       <Head>
@@ -12,10 +12,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Calendar />
+        <LoginBox />
       </main>
     </div>
   );
 };
 
-export default Home;
+export default Login;
