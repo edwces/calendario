@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import withAuth from "../modules/auth/withAuth";
 import Calendar from "../modules/calendar/Calendar";
 
 // TODO: Find a better way for styling Main div so it grows to have 100 %
@@ -18,4 +19,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

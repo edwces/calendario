@@ -1,8 +1,10 @@
-import { FieldValues } from "react-hook-form";
+import { useContext } from "react";
+import { FieldValues, useController } from "react-hook-form";
 import {
   useDeleteEventMutation,
   useEditEventMutation,
 } from "../../generated/graphql";
+import userStateContext from "../../stores/userState/userStateContext";
 import EventEditModal from "./EventEditModal";
 
 interface EventEditControllerProps {

@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { FieldValues } from "react-hook-form";
 import { useAddEventMutation } from "../../generated/graphql";
+import userStateContext from "../../stores/userState/userStateContext";
 import EventCreateModal from "./EventCreateModal";
 
 interface EventCreateControllerProps {
@@ -15,6 +17,7 @@ export default function EventCreateController({
   onRequestClose,
   selectedDate,
 }: EventCreateControllerProps) {
+  const { user } = useContext(userStateContext);
   const [result, execute] = useAddEventMutation();
 
   const onSubmit = async (data: FieldValues) => {
@@ -25,7 +28,7 @@ export default function EventCreateController({
       data: {
         title: data.title,
         date: selectedDate,
-        owner: { connect: { id: 1 } },
+        owner: { connect: { id: user?.id } },
       },
     });
   };

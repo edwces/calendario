@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useGetUserEventsQuery } from "../../generated/graphql";
+import userStateContext from "../../stores/userState/userStateContext";
 import CalendarBar from "./bar/CalendarBar";
 import MonthView from "./MonthView";
 
 export default function Calendar() {
   const [date, setDate] = useState(new Date());
+  const { user } = useContext(userStateContext);
   const [result, reexecute] = useGetUserEventsQuery({
-    variables: { where: { userId: { equals: 1 } } },
+    variables: { where: { userId: { equals: user?.id } } },
   });
   const { data, error, fetching } = result;
 
