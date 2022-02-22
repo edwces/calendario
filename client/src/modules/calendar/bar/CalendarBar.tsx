@@ -1,4 +1,6 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useContext } from "react";
+import userStateContext from "../../../stores/userState/userStateContext";
+import Avatar from "../../sidebar/Avatar";
 import StageSwitcher from "./StageSwitcher";
 
 interface CalendarBarProps {
@@ -12,6 +14,8 @@ export default function CalendarBar({
   onRight,
   date,
 }: CalendarBarProps) {
+  const { user } = useContext(userStateContext);
+
   return (
     <header className="flex flex-row p-2 bg-slate-50 justify-between items-center">
       <div className="flex flex-row gap-6">
@@ -24,6 +28,7 @@ export default function CalendarBar({
           })}
         </h1>
       </div>
+      <Avatar src={user ? user.avatar! : ""} className="mr-2" />
     </header>
   );
 }
