@@ -55,6 +55,11 @@ const HOST = process.env.HOST!;
   app.get("/", (req, res) => {
     res.send(`hello ${req.user?.id}`);
   });
+  app.get("/auth/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.json({ succes: true });
+    });
+  });
 
   // Create graphql schema
   const schema = await buildSchema({

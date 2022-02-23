@@ -1,5 +1,6 @@
 import { MouseEventHandler, useContext } from "react";
 import userStateContext from "../../../stores/userState/userStateContext";
+import LogoutButton from "../../auth/LogoutButton";
 import Avatar from "../../sidebar/Avatar";
 import StageSwitcher from "./StageSwitcher";
 
@@ -28,7 +29,10 @@ export default function CalendarBar({
           })}
         </h1>
       </div>
-      <Avatar src={user ? user.avatar! : ""} className="mr-2" />
+      <div className="flex flex-row, gap-3">
+        <LogoutButton />
+        <Avatar src={user ? user.avatar! : ""} className="mr-2" />
+      </div>
     </header>
   );
 }
