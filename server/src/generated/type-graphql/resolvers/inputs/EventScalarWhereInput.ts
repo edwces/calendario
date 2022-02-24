@@ -44,4 +44,9 @@ export class EventScalarWhereInput {
     nullable: true
   })
   date?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true
+  })
+  tagId?: IntFilter | undefined;
 }

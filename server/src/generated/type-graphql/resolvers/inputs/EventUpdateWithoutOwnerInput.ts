@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+import { TagUpdateOneRequiredWithoutEventsInput } from "../inputs/TagUpdateOneRequiredWithoutEventsInput";
 
 @TypeGraphQL.InputType("EventUpdateWithoutOwnerInput", {
   isAbstract: true
@@ -18,4 +19,9 @@ export class EventUpdateWithoutOwnerInput {
     nullable: true
   })
   date?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => TagUpdateOneRequiredWithoutEventsInput, {
+    nullable: true
+  })
+  tag?: TagUpdateOneRequiredWithoutEventsInput | undefined;
 }

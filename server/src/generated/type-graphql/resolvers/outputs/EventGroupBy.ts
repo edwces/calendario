@@ -32,6 +32,11 @@ export class EventGroupBy {
   })
   date!: Date;
 
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  tagId!: number;
+
   @TypeGraphQL.Field(_type => EventCountAggregate, {
     nullable: true
   })

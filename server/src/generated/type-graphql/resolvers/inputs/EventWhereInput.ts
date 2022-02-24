@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { TagRelationFilter } from "../inputs/TagRelationFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
 
 @TypeGraphQL.InputType("EventWhereInput", {
@@ -50,4 +51,14 @@ export class EventWhereInput {
     nullable: true
   })
   date?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => TagRelationFilter, {
+    nullable: true
+  })
+  tag?: TagRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true
+  })
+  tagId?: IntFilter | undefined;
 }
