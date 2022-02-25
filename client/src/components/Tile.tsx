@@ -4,11 +4,14 @@ import Button, { ButtonProps } from "./Button";
 import TileEvent from "./TileEvent";
 
 const styleTypes = {
-  primary: "",
+  primary: "bg-white",
   disabled: "bg-slate-100",
 };
 
-type TileProps = ButtonProps & {
+type TileProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> & {
   date: number;
   events?: Partial<Event>[];
   variant?: keyof typeof styleTypes;
@@ -24,7 +27,7 @@ export default function Tile({
   ...props
 }: TileProps) {
   return (
-    <Button
+    <div
       className={`flex flex-col basis-full ${styleTypes[variant]} ${className}`}
       {...props}
     >
@@ -41,6 +44,6 @@ export default function Tile({
             ></TileEvent>
           ))}
       </div>
-    </Button>
+    </div>
   );
 }

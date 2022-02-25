@@ -17,24 +17,18 @@ const styleTypes = {
   error: "ring-2 ring-red-600 outline-none",
 };
 
-export type InputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+export type InputProps = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  "size"
 > & {
   size?: keyof typeof styleSize;
   variant?: keyof typeof styleTypes;
   children?: ReactChild[] | ReactChild;
 };
 
-const Input = forwardRef(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    {
-      children,
-      size = "md",
-      variant = "primary",
-      className,
-      ...props
-    }: InputProps,
+    { children, size = "md", variant = "primary", className, ...props },
     ref
   ) => {
     return (
