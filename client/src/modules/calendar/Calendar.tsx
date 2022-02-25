@@ -12,14 +12,14 @@ export default function Calendar() {
   });
   const { data, error, fetching } = result;
 
-  const onLeft = (e) => {
+  const onLeft = () => {
     const newDate = new Date();
     newDate.setFullYear(date.getFullYear());
     newDate.setMonth(date.getMonth() - 1);
     setDate(newDate);
   };
 
-  const onRight = (e) => {
+  const onRight = () => {
     const newDate = new Date();
     newDate.setFullYear(date.getFullYear());
     newDate.setMonth(date.getMonth() + 1);
