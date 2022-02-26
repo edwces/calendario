@@ -27,9 +27,4 @@ export class EventMinOrderByAggregateInput {
     nullable: true
   })
   date?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  tagId?: "asc" | "desc" | undefined;
 }

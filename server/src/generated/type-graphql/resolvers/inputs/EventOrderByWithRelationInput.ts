@@ -2,7 +2,6 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { TagOrderByWithRelationInput } from "../inputs/TagOrderByWithRelationInput";
 import { UserOrderByWithRelationInput } from "../inputs/UserOrderByWithRelationInput";
 import { SortOrder } from "../../enums/SortOrder";
 
@@ -34,14 +33,4 @@ export class EventOrderByWithRelationInput {
     nullable: true
   })
   date?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => TagOrderByWithRelationInput, {
-    nullable: true
-  })
-  tag?: TagOrderByWithRelationInput | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  tagId?: "asc" | "desc" | undefined;
 }

@@ -35,5 +35,5 @@ export class FindFirstEventArgs {
   @TypeGraphQL.Field(_type => [EventScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "userId" | "title" | "date" | "tagId"> | undefined;
+  distinct?: Array<"id" | "userId" | "title" | "date"> | undefined;
 }

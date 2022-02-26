@@ -2,7 +2,6 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { TagCreateNestedOneWithoutEventsInput } from "../inputs/TagCreateNestedOneWithoutEventsInput";
 import { UserCreateNestedOneWithoutEventsInput } from "../inputs/UserCreateNestedOneWithoutEventsInput";
 
 @TypeGraphQL.InputType("EventCreateInput", {
@@ -23,9 +22,4 @@ export class EventCreateInput {
     nullable: false
   })
   owner!: UserCreateNestedOneWithoutEventsInput;
-
-  @TypeGraphQL.Field(_type => TagCreateNestedOneWithoutEventsInput, {
-    nullable: true
-  })
-  tag?: TagCreateNestedOneWithoutEventsInput | undefined;
 }

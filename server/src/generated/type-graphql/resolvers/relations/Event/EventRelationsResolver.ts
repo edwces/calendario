@@ -1,6 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
 import { Event } from "../../../models/Event";
-import { Tag } from "../../../models/Tag";
 import { User } from "../../../models/User";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
@@ -15,16 +14,5 @@ export class EventRelationsResolver {
         id: event.id,
       },
     }).owner({});
-  }
-
-  @TypeGraphQL.FieldResolver(_type => Tag, {
-    nullable: false
-  })
-  async tag(@TypeGraphQL.Root() event: Event, @TypeGraphQL.Ctx() ctx: any): Promise<Tag> {
-    return getPrismaFromContext(ctx).event.findUnique({
-      where: {
-        id: event.id,
-      },
-    }).tag({});
   }
 }

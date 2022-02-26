@@ -26,9 +26,4 @@ export class EventMaxAggregate {
     nullable: true
   })
   date!: Date | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  tagId!: number | null;
 }

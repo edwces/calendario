@@ -16,9 +16,4 @@ export class EventAvgAggregate {
     nullable: true
   })
   userId!: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: true
-  })
-  tagId!: number | null;
 }

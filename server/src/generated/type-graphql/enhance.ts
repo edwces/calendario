@@ -10,8 +10,7 @@ import * as inputTypes from "./resolvers/inputs";
 
 const crudResolversMap = {
   User: crudResolvers.UserCrudResolver,
-  Event: crudResolvers.EventCrudResolver,
-  Tag: crudResolvers.TagCrudResolver
+  Event: crudResolvers.EventCrudResolver
 };
 const actionResolversMap = {
   User: {
@@ -41,26 +40,11 @@ const actionResolversMap = {
     upsertEvent: actionResolvers.UpsertEventResolver,
     aggregateEvent: actionResolvers.AggregateEventResolver,
     groupByEvent: actionResolvers.GroupByEventResolver
-  },
-  Tag: {
-    tag: actionResolvers.FindUniqueTagResolver,
-    findFirstTag: actionResolvers.FindFirstTagResolver,
-    tags: actionResolvers.FindManyTagResolver,
-    createTag: actionResolvers.CreateTagResolver,
-    createManyTag: actionResolvers.CreateManyTagResolver,
-    deleteTag: actionResolvers.DeleteTagResolver,
-    updateTag: actionResolvers.UpdateTagResolver,
-    deleteManyTag: actionResolvers.DeleteManyTagResolver,
-    updateManyTag: actionResolvers.UpdateManyTagResolver,
-    upsertTag: actionResolvers.UpsertTagResolver,
-    aggregateTag: actionResolvers.AggregateTagResolver,
-    groupByTag: actionResolvers.GroupByTagResolver
   }
 };
 const crudResolversInfo = {
   User: ["user", "findFirstUser", "users", "createUser", "createManyUser", "deleteUser", "updateUser", "deleteManyUser", "updateManyUser", "upsertUser", "aggregateUser", "groupByUser"],
-  Event: ["event", "findFirstEvent", "events", "createEvent", "createManyEvent", "deleteEvent", "updateEvent", "deleteManyEvent", "updateManyEvent", "upsertEvent", "aggregateEvent", "groupByEvent"],
-  Tag: ["tag", "findFirstTag", "tags", "createTag", "createManyTag", "deleteTag", "updateTag", "deleteManyTag", "updateManyTag", "upsertTag", "aggregateTag", "groupByTag"]
+  Event: ["event", "findFirstEvent", "events", "createEvent", "createManyEvent", "deleteEvent", "updateEvent", "deleteManyEvent", "updateManyEvent", "upsertEvent", "aggregateEvent", "groupByEvent"]
 };
 const argsInfo = {
   FindUniqueUserArgs: ["where"],
@@ -86,19 +70,7 @@ const argsInfo = {
   UpdateManyEventArgs: ["data", "where"],
   UpsertEventArgs: ["where", "create", "update"],
   AggregateEventArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByEventArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueTagArgs: ["where"],
-  FindFirstTagArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyTagArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateTagArgs: ["data"],
-  CreateManyTagArgs: ["data", "skipDuplicates"],
-  DeleteTagArgs: ["where"],
-  UpdateTagArgs: ["data", "where"],
-  DeleteManyTagArgs: ["where"],
-  UpdateManyTagArgs: ["data", "where"],
-  UpsertTagArgs: ["where", "create", "update"],
-  AggregateTagArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByTagArgs: ["where", "orderBy", "by", "having", "take", "skip"]
+  GroupByEventArgs: ["where", "orderBy", "by", "having", "take", "skip"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;
@@ -189,13 +161,11 @@ export function applyArgsTypesEnhanceMap(
 
 const relationResolversMap = {
   User: relationResolvers.UserRelationsResolver,
-  Event: relationResolvers.EventRelationsResolver,
-  Tag: relationResolvers.TagRelationsResolver
+  Event: relationResolvers.EventRelationsResolver
 };
 const relationResolversInfo = {
   User: ["events"],
-  Event: ["owner", "tag"],
-  Tag: ["events"]
+  Event: ["owner"]
 };
 
 type RelationResolverModelNames = keyof typeof relationResolversMap;
@@ -277,8 +247,7 @@ function applyTypeClassEnhanceConfig<
 
 const modelsInfo = {
   User: ["id", "googleId", "name", "avatar"],
-  Event: ["id", "userId", "title", "date", "tagId"],
-  Tag: ["id", "name"]
+  Event: ["id", "userId", "title", "date"]
 };
 
 type ModelNames = keyof typeof models;
@@ -320,9 +289,7 @@ const outputsInfo = {
   AggregateUser: ["_count", "_avg", "_sum", "_min", "_max"],
   UserGroupBy: ["id", "googleId", "name", "avatar", "_count", "_avg", "_sum", "_min", "_max"],
   AggregateEvent: ["_count", "_avg", "_sum", "_min", "_max"],
-  EventGroupBy: ["id", "userId", "title", "date", "tagId", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregateTag: ["_count", "_avg", "_sum", "_min", "_max"],
-  TagGroupBy: ["id", "name", "_count", "_avg", "_sum", "_min", "_max"],
+  EventGroupBy: ["id", "userId", "title", "date", "_count", "_avg", "_sum", "_min", "_max"],
   AffectedRowsOutput: ["count"],
   UserCount: ["events"],
   UserCountAggregate: ["id", "googleId", "name", "avatar", "_all"],
@@ -330,17 +297,11 @@ const outputsInfo = {
   UserSumAggregate: ["id"],
   UserMinAggregate: ["id", "googleId", "name", "avatar"],
   UserMaxAggregate: ["id", "googleId", "name", "avatar"],
-  EventCountAggregate: ["id", "userId", "title", "date", "tagId", "_all"],
-  EventAvgAggregate: ["id", "userId", "tagId"],
-  EventSumAggregate: ["id", "userId", "tagId"],
-  EventMinAggregate: ["id", "userId", "title", "date", "tagId"],
-  EventMaxAggregate: ["id", "userId", "title", "date", "tagId"],
-  TagCount: ["events"],
-  TagCountAggregate: ["id", "name", "_all"],
-  TagAvgAggregate: ["id"],
-  TagSumAggregate: ["id"],
-  TagMinAggregate: ["id", "name"],
-  TagMaxAggregate: ["id", "name"]
+  EventCountAggregate: ["id", "userId", "title", "date", "_all"],
+  EventAvgAggregate: ["id", "userId"],
+  EventSumAggregate: ["id", "userId"],
+  EventMinAggregate: ["id", "userId", "title", "date"],
+  EventMaxAggregate: ["id", "userId", "title", "date"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -386,28 +347,19 @@ const inputsInfo = {
   UserWhereUniqueInput: ["id", "googleId"],
   UserOrderByWithAggregationInput: ["id", "googleId", "name", "avatar", "_count", "_avg", "_max", "_min", "_sum"],
   UserScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "googleId", "name", "avatar"],
-  EventWhereInput: ["AND", "OR", "NOT", "id", "owner", "userId", "title", "date", "tag", "tagId"],
-  EventOrderByWithRelationInput: ["id", "owner", "userId", "title", "date", "tag", "tagId"],
+  EventWhereInput: ["AND", "OR", "NOT", "id", "owner", "userId", "title", "date"],
+  EventOrderByWithRelationInput: ["id", "owner", "userId", "title", "date"],
   EventWhereUniqueInput: ["id"],
-  EventOrderByWithAggregationInput: ["id", "userId", "title", "date", "tagId", "_count", "_avg", "_max", "_min", "_sum"],
-  EventScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "userId", "title", "date", "tagId"],
-  TagWhereInput: ["AND", "OR", "NOT", "id", "name", "events"],
-  TagOrderByWithRelationInput: ["id", "name", "events"],
-  TagWhereUniqueInput: ["id"],
-  TagOrderByWithAggregationInput: ["id", "name", "_count", "_avg", "_max", "_min", "_sum"],
-  TagScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "name"],
+  EventOrderByWithAggregationInput: ["id", "userId", "title", "date", "_count", "_avg", "_max", "_min", "_sum"],
+  EventScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "userId", "title", "date"],
   UserCreateInput: ["googleId", "name", "avatar", "events"],
   UserUpdateInput: ["googleId", "name", "avatar", "events"],
   UserCreateManyInput: ["id", "googleId", "name", "avatar"],
   UserUpdateManyMutationInput: ["googleId", "name", "avatar"],
-  EventCreateInput: ["title", "date", "owner", "tag"],
-  EventUpdateInput: ["title", "date", "owner", "tag"],
-  EventCreateManyInput: ["id", "userId", "title", "date", "tagId"],
+  EventCreateInput: ["title", "date", "owner"],
+  EventUpdateInput: ["title", "date", "owner"],
+  EventCreateManyInput: ["id", "userId", "title", "date"],
   EventUpdateManyMutationInput: ["title", "date"],
-  TagCreateInput: ["name", "events"],
-  TagUpdateInput: ["name", "events"],
-  TagCreateManyInput: ["id", "name"],
-  TagUpdateManyMutationInput: ["name"],
   IntFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   StringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "mode", "not"],
   EventListRelationFilter: ["every", "some", "none"],
@@ -421,29 +373,19 @@ const inputsInfo = {
   StringWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "mode", "not", "_count", "_min", "_max"],
   UserRelationFilter: ["is", "isNot"],
   DateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
-  TagRelationFilter: ["is", "isNot"],
-  EventCountOrderByAggregateInput: ["id", "userId", "title", "date", "tagId"],
-  EventAvgOrderByAggregateInput: ["id", "userId", "tagId"],
-  EventMaxOrderByAggregateInput: ["id", "userId", "title", "date", "tagId"],
-  EventMinOrderByAggregateInput: ["id", "userId", "title", "date", "tagId"],
-  EventSumOrderByAggregateInput: ["id", "userId", "tagId"],
+  EventCountOrderByAggregateInput: ["id", "userId", "title", "date"],
+  EventAvgOrderByAggregateInput: ["id", "userId"],
+  EventMaxOrderByAggregateInput: ["id", "userId", "title", "date"],
+  EventMinOrderByAggregateInput: ["id", "userId", "title", "date"],
+  EventSumOrderByAggregateInput: ["id", "userId"],
   DateTimeWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_min", "_max"],
-  TagCountOrderByAggregateInput: ["id", "name"],
-  TagAvgOrderByAggregateInput: ["id"],
-  TagMaxOrderByAggregateInput: ["id", "name"],
-  TagMinOrderByAggregateInput: ["id", "name"],
-  TagSumOrderByAggregateInput: ["id"],
   EventCreateNestedManyWithoutOwnerInput: ["create", "connectOrCreate", "createMany", "connect"],
   StringFieldUpdateOperationsInput: ["set"],
   EventUpdateManyWithoutOwnerInput: ["create", "connectOrCreate", "upsert", "createMany", "set", "disconnect", "delete", "connect", "update", "updateMany", "deleteMany"],
   IntFieldUpdateOperationsInput: ["set", "increment", "decrement", "multiply", "divide"],
   UserCreateNestedOneWithoutEventsInput: ["create", "connectOrCreate", "connect"],
-  TagCreateNestedOneWithoutEventsInput: ["create", "connectOrCreate", "connect"],
   DateTimeFieldUpdateOperationsInput: ["set"],
   UserUpdateOneRequiredWithoutEventsInput: ["create", "connectOrCreate", "upsert", "connect", "update"],
-  TagUpdateOneRequiredWithoutEventsInput: ["create", "connectOrCreate", "upsert", "connect", "update"],
-  EventCreateNestedManyWithoutTagInput: ["create", "connectOrCreate", "createMany", "connect"],
-  EventUpdateManyWithoutTagInput: ["create", "connectOrCreate", "upsert", "createMany", "set", "disconnect", "delete", "connect", "update", "updateMany", "deleteMany"],
   NestedIntFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedStringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   NestedIntWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_avg", "_sum", "_min", "_max"],
@@ -451,31 +393,19 @@ const inputsInfo = {
   NestedStringWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
   NestedDateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedDateTimeWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_min", "_max"],
-  EventCreateWithoutOwnerInput: ["title", "date", "tag"],
+  EventCreateWithoutOwnerInput: ["title", "date"],
   EventCreateOrConnectWithoutOwnerInput: ["where", "create"],
   EventCreateManyOwnerInputEnvelope: ["data", "skipDuplicates"],
   EventUpsertWithWhereUniqueWithoutOwnerInput: ["where", "update", "create"],
   EventUpdateWithWhereUniqueWithoutOwnerInput: ["where", "data"],
   EventUpdateManyWithWhereWithoutOwnerInput: ["where", "data"],
-  EventScalarWhereInput: ["AND", "OR", "NOT", "id", "userId", "title", "date", "tagId"],
+  EventScalarWhereInput: ["AND", "OR", "NOT", "id", "userId", "title", "date"],
   UserCreateWithoutEventsInput: ["googleId", "name", "avatar"],
   UserCreateOrConnectWithoutEventsInput: ["where", "create"],
-  TagCreateWithoutEventsInput: ["name"],
-  TagCreateOrConnectWithoutEventsInput: ["where", "create"],
   UserUpsertWithoutEventsInput: ["update", "create"],
   UserUpdateWithoutEventsInput: ["googleId", "name", "avatar"],
-  TagUpsertWithoutEventsInput: ["update", "create"],
-  TagUpdateWithoutEventsInput: ["name"],
-  EventCreateWithoutTagInput: ["title", "date", "owner"],
-  EventCreateOrConnectWithoutTagInput: ["where", "create"],
-  EventCreateManyTagInputEnvelope: ["data", "skipDuplicates"],
-  EventUpsertWithWhereUniqueWithoutTagInput: ["where", "update", "create"],
-  EventUpdateWithWhereUniqueWithoutTagInput: ["where", "data"],
-  EventUpdateManyWithWhereWithoutTagInput: ["where", "data"],
-  EventCreateManyOwnerInput: ["id", "title", "date", "tagId"],
-  EventUpdateWithoutOwnerInput: ["title", "date", "tag"],
-  EventCreateManyTagInput: ["id", "userId", "title", "date"],
-  EventUpdateWithoutTagInput: ["title", "date", "owner"]
+  EventCreateManyOwnerInput: ["id", "title", "date"],
+  EventUpdateWithoutOwnerInput: ["title", "date"]
 };
 
 type InputTypesNames = keyof typeof inputTypes;

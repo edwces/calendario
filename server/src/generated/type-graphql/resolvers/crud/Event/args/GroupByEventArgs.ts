@@ -20,7 +20,7 @@ export class GroupByEventArgs {
   @TypeGraphQL.Field(_type => [EventScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "userId" | "title" | "date" | "tagId">;
+  by!: Array<"id" | "userId" | "title" | "date">;
 
   @TypeGraphQL.Field(_type => EventScalarWhereWithAggregatesInput, {
     nullable: true

@@ -26,9 +26,4 @@ export class EventCreateManyInput {
     nullable: false
   })
   date!: Date;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  tagId?: number | undefined;
 }

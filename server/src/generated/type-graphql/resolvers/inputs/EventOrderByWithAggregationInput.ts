@@ -33,11 +33,6 @@ export class EventOrderByWithAggregationInput {
   })
   date?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  tagId?: "asc" | "desc" | undefined;
-
   @TypeGraphQL.Field(_type => EventCountOrderByAggregateInput, {
     nullable: true
   })

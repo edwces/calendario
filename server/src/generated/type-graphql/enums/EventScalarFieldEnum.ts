@@ -4,8 +4,7 @@ export enum EventScalarFieldEnum {
   id = "id",
   userId = "userId",
   title = "title",
-  date = "date",
-  tagId = "tagId"
+  date = "date"
 }
 TypeGraphQL.registerEnumType(EventScalarFieldEnum, {
   name: "EventScalarFieldEnum",

@@ -16,9 +16,4 @@ export class EventSumAggregate {
     nullable: true
   })
   userId!: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  tagId!: number | null;
 }

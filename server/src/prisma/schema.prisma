@@ -29,12 +29,4 @@ model Event {
   userId Int
   title  String
   date   DateTime @db.Date
-  tag    Tag      @relation(fields: [tagId], references: [id])
-  tagId  Int      @default(1)
-}
-
-model Tag {
-  id     Int     @id @default(autoincrement())
-  name   String
-  events Event[]
 }

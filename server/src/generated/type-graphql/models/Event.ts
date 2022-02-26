@@ -2,7 +2,6 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
-import { Tag } from "../models/Tag";
 import { User } from "../models/User";
 
 @TypeGraphQL.ObjectType("Event", {
@@ -30,11 +29,4 @@ export class Event {
     nullable: false
   })
   date!: Date;
-
-  tag?: Tag;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
-  tagId!: number;
 }
