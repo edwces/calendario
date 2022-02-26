@@ -15,8 +15,6 @@ export default function MonthView({ date, events }: MonthViewProps) {
   const [isEditOpen, setEditOpen] = useState(false);
   const [id, setId] = useState(0);
 
-  console.log(events);
-
   const daysBefore = getFirstDay(date).getDay() - 1;
 
   const calculateDay = (index: number, wIndex: number) =>

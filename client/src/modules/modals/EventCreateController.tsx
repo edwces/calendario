@@ -21,9 +21,6 @@ export default function EventCreateController({
   const [result, execute] = useAddEventMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
-    console.log(selectedDate);
-
     await execute({
       data: {
         title: data.title,
